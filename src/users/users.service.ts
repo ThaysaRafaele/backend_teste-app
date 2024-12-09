@@ -7,7 +7,7 @@ export class UsersService {
   private users: User[] = [];
 
   createUser(user: User): User {
-    // user.id = this.users.length + 1; //ainda não sei a necessidade de inserir id
+    user.id = this.users.length + 1;
     this.users.push(user);
     return user;
   }
@@ -16,19 +16,18 @@ export class UsersService {
     return this.users;
   }
 
-  // Quando acresecntar futuramente para facilitar busca do usuário
-  // getUserById(id: number): User {
-  //   return this.users.find((user) => user.id === id);
-  // }
+  getUserById(id: number): User {
+    return this.users.find((user) => user.id === id);
+  }
 
-  // updateUser(id: number, updatedUser: Partial<User>): User {
-  //   const userIndex = this.users.findIndex((user) => user.id === id);
-  //   if (userIndex === -1) {
-  //     throw new Error('User not found');
-  //   }
-  //   this.users[userIndex] = { ...this.users[userIndex], ...updatedUser };
-  //   return this.users[userIndex];
-  // }
+  updateUser(id: number, updatedUser: Partial<User>): User {
+    const userIndex = this.users.findIndex((user) => user.id === id);
+    if (userIndex === -1) {
+      throw new Error('User not found');
+    }
+    this.users[userIndex] = { ...this.users[userIndex], ...updatedUser };
+    return this.users[userIndex];
+  }
 
   async validateCep(cep: string): Promise<boolean> {
     try {
